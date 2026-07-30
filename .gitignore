@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# runtime output - don't commit test artifacts
+screenshots/
+reports/
+*.db
+crawl_output.json
+
+.env
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,30 @@
+name: Scout CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run crawler smoke test
+        run: python scout/crawler.py https://example.com
+
+      - name: Upload crawl output
+        uses: actions/upload-artifact@v4
+        with:
+          name: crawl-output
+          path: crawl_output.json
